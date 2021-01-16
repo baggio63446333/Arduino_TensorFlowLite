@@ -22,6 +22,10 @@ limitations under the License.
 #include "tensorflow/lite/c/common.h"
 #include "tensorflow/lite/kernels/op_macros.h"
 
+// Workaround: fminf(), fmaxf() doesn't exist
+#define fminf(a,b) ((a)<(b)?(a):(b))
+#define fmaxf(a,b) ((a)>(b)?(a):(b))
+
 namespace tflite {
 
 int ElementCount(const TfLiteIntArray& dims) {

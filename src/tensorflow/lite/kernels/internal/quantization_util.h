@@ -133,7 +133,8 @@ IntOut SafeCast(FloatIn x) {
   static_assert(std::numeric_limits<IntOut>::radix == 2, "IntOut is base 2");
 
   // Special case NaN, for which the logic below doesn't work.
-  if (std::isnan(x)) {
+  // Workaround: Modify from std::isnan(x)
+  if (isnan(x)) {
     return 0;
   }
 
@@ -143,7 +144,8 @@ IntOut SafeCast(FloatIn x) {
   }
 
   // Handle infinities.
-  if (std::isinf(x)) {
+  // Workaround: Modify from std::isinf(x)
+  if (isinf(x)) {
     return x < 0 ? std::numeric_limits<IntOut>::min()
                  : std::numeric_limits<IntOut>::max();
   }

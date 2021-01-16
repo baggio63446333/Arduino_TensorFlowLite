@@ -42,7 +42,8 @@ inline float ActivationValFloat(TfLiteFusedActivation act, float a) {
     case kTfLiteActTanh:
       return std::tanh(a);
     case kTfLiteActSignBit:
-      return std::signbit(a);
+      // Workaround: Modify from std::signbit(a)
+      return __builtin_signbit(a);
     case kTfLiteActSigmoid:
       return 1.0f / (1.0f + std::exp(-a));
   }
